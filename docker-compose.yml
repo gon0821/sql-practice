@@ -1,0 +1,16 @@
+services:
+  db:
+    image: mysql:8.0                                # イメージの指定
+    container_name: mysql-container                 # コンテナ名の指定
+    platform: linux/x86_64                          # Apple Silicon (M1/M2/M3) Macで安定動作させるための設定
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}   # .envファイルから読み込む
+      MYSQL_DATABASE: ${MYSQL_DATABASE}             # .envファイルから読み込む
+    ports:
+      - "3306:3306"                                 # ホストのポート3306をコンテナのポート3306にマッピング
+    volumes:
+      - mysql-data:/var/lib/mysql                  # データ永続化のためのボリュームマウント
+
+volumes:
+  mysql-data:
+
